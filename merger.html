@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html> <head> <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color:red;
+  }
+
+  .flex-container > div { 
+  background-color: pink; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+  }
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style>
+<title>WebAppsAssignment07Venkata Teja Bollu</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+</head>
+
+
+
+<body>
+    <h1>Venkata Teja Bollu builds a merger</h1>
+    <br>
+    <hr>
+    <div class="mb-3">
+        <label for="text">Enter Text : </label>
+        <input type="text" id="text" name="text" autofocus>
+    </div>
+
+    <br>
+		<div class="flex-container" id="target">
+		  <div class="merger">row item 1</div>   
+		  <div class="merger">row item 2</div>  
+		  <div class="merger">row item 3</div>  
+		</div>
+	
+	<p> Press the button to create an new element of type div and then add it to the container.</p>
+    <div class=" container text-center">
+		<button onclick="makeNewDiv()">Add end</button>
+        <button onclick="addFront()" >Add Front</button>
+        <button onclick="remove()">Remove</button>
+        <button onclick="swap()">Swap</button>
+    </div>
+        
+	
+	
+</body>
+<script>
+	function makeNewDiv(){
+		/* make the div and its text */
+		let element = document.createElement("div")
+		element.innerHTML = document.getElementById("text").value;
+        element.className = "merger"
+		element.style.color = "orange"
+
+		/* add it to the container */
+		let container = document.getElementById('target')
+		container.appendChild(element)
+		
+	}
+
+    function remove(){
+        let mergerItems = document.getElementsByClassName("merger")
+        const lengthOfmergerItems = mergerItems.length
+        if(lengthOfmergerItems>0)
+        {
+            mergerItems[Math.floor(lengthOfmergerItems/2)].remove()
+        }
+    }
+    function addFront(){
+        let element = document.createElement("div")
+        element.innerHTML = document.getElementById("text").value;
+        element.className = "merger"
+        element.style.color = "orange"
+
+        let parent = document.getElementsByClassName("merger")[0].parentNode
+        let childElement = document.getElementsByClassName("merger")[0]
+        parent.insertBefore(element,childElement)
+    }
+
+    function swap()
+  {
+    let mergerItemss = document.getElementsByClassName("merger")
+    let mergerItemssLength = mergerItemss.length
+    let firstElement = mergerItemss[Math.round(Math.random()*(mergerItemssLength-1))]
+    let secondElement = mergerItemss[Math.round(Math.random()*(mergerItemssLength-1))]
+
+    let parentElement = firstElement.parentNode
+    
+    const siblingA = firstElement.nextSibling === secondElement ? firstElement : firstElement.nextSibling;
+    secondElement.parentNode.insertBefore(firstElement, secondElement);
+    parentElement.insertBefore(secondElement, siblingA);
+  }
+
+</script>
+</html>

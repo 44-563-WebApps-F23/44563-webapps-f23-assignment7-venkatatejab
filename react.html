@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Webapps Assignment07 Venkata Teja Bollu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+
+    <h1>Venkata Teja Bollu speed check</h1>
+    <div id="target">Your Time:</div>
+    <div id="counter">Count:</div>
+
+    <div class="container text-center">
+        <button type="button" class="btn btn-success" onclick="startTime()">Start Timer</button>
+        <button type="button" class="btn btn-success" onclick="recordTime()">React</button>
+    </div>
+  
+ 
+  
+  <script> 
+
+  let reactTime = undefined;
+  function recordTime()
+  {
+    reactTime = Date.now()
+    console.log("Current time in milli seconds: "+reactTime)
+  }
+  function startTime()
+  {
+    reactTime = undefined;
+    endTime = Date.now();
+    let randomCountDown = Math.round(Math.random() * (10 - 2) + 2)
+    for(let i=0;i<randomCountDown;i++)
+    {
+        setTimeout( function () {
+            document.getElementById('counter').innerHTML = `Count: ${i}`
+        } , (randomCountDown-i)*1000)
+    }
+    setTimeout( function () {document.getElementById('counter').innerHTML = `Count: ${i}`} , 8000)
+    setTimeout(function()
+    {
+        if (reactTime == undefined) 
+        {
+            document.getElementById("target").innerHTML = "Too Slow";
+        }
+        else
+        {
+            const elapsed_time =Math.abs(endTime-reactTime)
+            document.getElementById("target").innerHTML="Time was "+elapsed_time
+        }
+    },8000)
+
+  }
+
+  
+
+  </script>
+
+</body>
+</html>
